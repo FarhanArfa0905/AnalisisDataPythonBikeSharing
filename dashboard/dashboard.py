@@ -4,7 +4,7 @@ import seaborn as sns
 import streamlit as st
 
 # Memuat Data data yang diperlukan
-all_df = pd.read_csv("all_data.csv")
+all_df = pd.read_csv("dashboard/all_data.csv")
 all_df["dteday"] = pd.to_datetime(all_df["dteday"])
 
 # Membuat Sidebar untuk pilihan rentang tanggal berapa yang diinginkan
