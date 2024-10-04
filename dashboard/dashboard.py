@@ -47,10 +47,9 @@ performance_per_year = create_performance_per_year_df(filtered_df)
 
 # Main Dashboard
 st.header('Bike Sharing Dashboard')
-st.write("In this Dashboard we show history about number of rentals.")
+# Bagaimana perbandingan Musim dengan Jumlah Pengguna Sepeda
 
-# Hubungan Musim dengan Jumlah Pengguna Sepeda
-st.subheader('Relationship between Season and Number of Rent Bcycle')
+st.subheader('Bagaimana tren penyewaan sepeda terhadap perubahan musim')
 
 # Atur urutan musim sebagai kategori
 season_order = ['springer', 'summer', 'fall', 'winter']
@@ -65,16 +64,16 @@ rentals_per_season_melted['User Type'] = pd.Categorical(rentals_per_season_melte
 
 fig, ax = plt.subplots(figsize=(10, 5))
 sns.barplot(x='season', y='Count', hue='User Type', data=rentals_per_season_melted, ax=ax)
-plt.title("Number of Rent Bcycle per Season", loc="center", fontsize=15)
-plt.ylabel("Number of Rent")
+plt.title("Jumlah Penyewaan Sepeda saat Holiday dan Weekend dengan hari kerja", loc="center", fontsize=15)
+plt.ylabel("Jumlah Penyewa")
 plt.xlabel("Season")
 plt.gca().yaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
 plt.xticks(rotation=45)
 plt.legend(title='User Type')
 st.pyplot(fig)
 
-# Hubungan Jumlah Penyewa Sepeda pada Saat Holiday dan Weekend dengan Hari Kerja Buat Sub Judul
-st.subheader('Relationship between the number of bicycle renters during holidays and weekends with weekdays')
+# Bagaimana perbandingan Jumlah Penyewa Sepeda pada Saat Holiday dan Weekend dengan Hari Kerja Buat Sub Judul
+st.subheader('Bagaimana tren penyewaan sepeda pada saat libur dan akhir pekan dibandingkan dengan hari kerja')
 
 #memisahkan casual, registered, dan cnt
 rentals_by_workingday_melted = rentals_by_workingday.melt(id_vars='workingday', value_vars=['cnt', 'registered', 'casual'], var_name='User Type', value_name='Count')
@@ -84,13 +83,13 @@ rentals_by_workingday_melted['User Type'] = pd.Categorical(rentals_by_workingday
 
 fig, ax = plt.subplots(figsize=(10, 5))
 sns.barplot(x='workingday', y='Count', hue='User Type', data=rentals_by_workingday_melted, ax=ax)
-plt.title("Number of Rent per Weekday or Weekend + Holiday", loc="center", fontsize=15)
-plt.ylabel("Number of Rent")
+plt.title("Jumlah Penyewaan Sepeda saat Holiday dan Weekend dengan hari kerja", loc="center", fontsize=15)
+plt.ylabel("Jumlah Penyewa")
 plt.gca().yaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
 st.pyplot(fig)
 
-# Hubungan Holiday dengan Tidak Holiday Terhadap Jumlah Penyewa
-st.subheader('The Relationship between Holidays and Non-Holidays on the Number of Rent')
+# Bagaimana perbandingan Holiday dengan Tidak Holiday Terhadap Jumlah Penyewa
+st.subheader('Bagaimana perbedaan tren penyewaan sepeda antara hari libur dan hari biasa')
 
 # memisahkan casual, registered, dan cnt
 holiday_non_holiday_melted = holiday_non_holiday.melt(id_vars='holiday', value_vars=['cnt', 'registered', 'casual'],var_name='User Type', value_name='Count')
@@ -100,13 +99,13 @@ holiday_non_holiday_melted['User Type'] = pd.Categorical(holiday_non_holiday_mel
 
 fig, ax = plt.subplots(figsize=(10, 5))
 sns.barplot(x='holiday', y='Count', hue='User Type', data=holiday_non_holiday_melted, ax=ax)
-plt.title("Number of Rent per Holiday or not holiday", loc="center", fontsize=15)
-plt.ylabel("Number of Rent")
+plt.title("Jumlah Penyewaan Sepeda Saat Holiday dan Tidak Holiday", loc="center", fontsize=15)
+plt.ylabel("Jumlah Penyewa")
 plt.gca().yaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
 st.pyplot(fig)
 
 # Performa Bike Sharing dari Tahun ke Tahun
-st.subheader('Bike Sharing Performance from Year to Year')
+st.subheader('Bagaimana perkembangan tren penyewaan sepeda dari tahun 2011 ke tahun 2012')
 
 # Reshape untuk memisahkan casual, registered, dan cnt
 performance_per_year_melted = performance_per_year.melt(id_vars='yr', value_vars=['cnt', 'registered', 'casual'], var_name='User Type', value_name='Count')
@@ -116,8 +115,8 @@ performance_per_year_melted['User Type'] = pd.Categorical(performance_per_year_m
 
 fig, ax = plt.subplots(figsize=(10, 5))
 sns.barplot(x='yr', y='Count', hue='User Type', data=performance_per_year_melted, ax=ax)
-plt.title("Bike Sharing Performance from Year 2011 and 2012", loc="center", fontsize=15)
-plt.ylabel("Number of Rent")
+plt.title("Performa Penyewaan Sepeda dari Tahun 2011 ke Tahun 2012", loc="center", fontsize=15)
+plt.ylabel("Jumlah Penyewa")
 plt.gca().yaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
 st.pyplot(fig)
 
